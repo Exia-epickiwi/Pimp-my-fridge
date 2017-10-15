@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.control.Tooltip?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="426.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/8.0.162-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.epickiwi.pmf.view.gui.MainController">
+   <children>
+      <HBox layoutX="200.0" layoutY="110.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane minWidth="145.0" prefWidth="145.0" HBox.hgrow="NEVER">
+               <children>
+                  <TitledPane animated="false" collapsible="false" style="-fx-border-radius: 0;" text="Consigne" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <AnchorPane VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="+" textFill="#393939" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="50.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <Label alignment="CENTER" text="15°C" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="30.0" />
+                                             </font>
+                                             <tooltip>
+                                                <Tooltip maxWidth="200.0" text="Cette température ne sera pas atteinte sans condensation" wrapText="true">
+                                                   <font>
+                                                      <Font size="15.0" />
+                                                   </font>
+                                                </Tooltip>
+                                             </tooltip>
+                                          </Label>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="-" textFill="#393939" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <font>
+                                                <Font size="50.0" />
+                                             </font>
+                                          </Button>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane VBox.vgrow="NEVER">
+                                       <children>
+                                          <VBox spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <children>
+                                                <ComboBox editable="true" prefWidth="150.0" promptText="Preset" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </TitledPane>
+               </children>
+            </AnchorPane>
+            <VBox alignment="TOP_CENTER" HBox.hgrow="ALWAYS">
+               <children>
+                  <TitledPane style="-fx-border-radius: 0;" text="Température" VBox.vgrow="ALWAYS">
+                    <content>
+                      <AnchorPane>
+                           <children>
+                              <HBox layoutX="72.0" layoutY="60.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <AnchorPane minWidth="250.0" HBox.hgrow="NEVER">
+                                       <children>
+                                          <GridPane hgap="10.0" prefWidth="182.0" vgap="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <columnConstraints>
+                                              <ColumnConstraints halignment="LEFT" hgrow="NEVER" />
+                                              <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                                            </columnConstraints>
+                                            <rowConstraints>
+                                              <RowConstraints minHeight="10.0" vgrow="NEVER" />
+                                              <RowConstraints minHeight="10.0" vgrow="NEVER" />
+                                              <RowConstraints minHeight="10.0" vgrow="NEVER" />
+                                                <RowConstraints maxHeight="0.0" minHeight="-Infinity" prefHeight="0.0" vgrow="NEVER" />
+                                                <RowConstraints maxHeight="0.0" minHeight="-Infinity" prefHeight="0.0" vgrow="NEVER" />
+                                            </rowConstraints>
+                                             <children>
+                                                <Label text="Température actuel" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="12 °C" GridPane.columnIndex="1" />
+                                                <Label text="Consigne" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="15 °C" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label text="20 min" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Label text="Temps restant" GridPane.rowIndex="2">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                             </children>
+                                          </GridPane>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <LineChart animated="false" legendVisible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                            <xAxis>
+                                              <CategoryAxis side="BOTTOM" />
+                                            </xAxis>
+                                            <yAxis>
+                                              <NumberAxis label="°C" side="LEFT" />
+                                            </yAxis>
+                                          </LineChart>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </TitledPane>
+                  <TitledPane style="-fx-border-radius: 0;" text="Humidité" VBox.vgrow="ALWAYS">
+                    <content>
+                      <AnchorPane>
+                           <children>
+                              <HBox AnchorPane.bottomAnchor="-0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <children>
+                                    <AnchorPane minWidth="250.0" HBox.hgrow="NEVER">
+                                       <children>
+                                          <GridPane hgap="10.0" prefWidth="182.0" vgap="5.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <columnConstraints>
+                                                <ColumnConstraints halignment="LEFT" hgrow="NEVER" />
+                                                <ColumnConstraints hgrow="ALWAYS" minWidth="10.0" />
+                                             </columnConstraints>
+                                             <rowConstraints>
+                                                <RowConstraints minHeight="10.0" vgrow="NEVER" />
+                                                <RowConstraints minHeight="10.0" vgrow="NEVER" />
+                                                <RowConstraints maxHeight="0.0" minHeight="-Infinity" prefHeight="0.0" vgrow="NEVER" />
+                                                <RowConstraints maxHeight="0.0" minHeight="-Infinity" prefHeight="0.0" vgrow="NEVER" />
+                                             </rowConstraints>
+                                             <children>
+                                                <Label text="Humidité mesurée" GridPane.halignment="LEFT" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="12 °C" GridPane.columnIndex="1" />
+                                                <Label text="Point de rosée" GridPane.rowIndex="1">
+                                                   <font>
+                                                      <Font name="System Bold" size="13.0" />
+                                                   </font>
+                                                </Label>
+                                                <Label text="15 °C" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                             </children>
+                                          </GridPane>
+                                          <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
+                                             <children>
+                                                <CheckBox mnemonicParsing="false" text="Empêcher la condensation" />
+                                             </children>
+                                          </VBox>
+                                       </children>
+                                    </AnchorPane>
+                                    <AnchorPane HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <LineChart animated="false" legendVisible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                             <xAxis>
+                                                <CategoryAxis side="BOTTOM" />
+                                             </xAxis>
+                                             <yAxis>
+                                                <NumberAxis label="\%" side="LEFT" />
+                                             </yAxis>
+                                          </LineChart>
+                                       </children>
+                                    </AnchorPane>
+                                 </children>
+                              </HBox>
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </TitledPane>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
