@@ -1,6 +1,6 @@
 # Pimp my fridge
 
-*Pimp my fridge* est un projet de 3e année dont l'objectif est de créer un circuit de refroidissement intelligent a l'aide d'une Arduino contrôlé par une application Java sur l'ordinateur connecté.
+*Pimp my fridge* est un projet de 3e année dont l'objectif est de créer un circuit de refroidissement intelligent a l'aide d'une Arduino contrôlée par une application Java sur l'ordinateur connecté.
 
 ## Cahier des charges
 
