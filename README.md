@@ -109,4 +109,4 @@
 
 ## Design poster
 
-![Poster](img/poster.jpg)
+![Poster](img/Poster.jpg)
