@@ -20,6 +20,7 @@
     - Développement client
     - Présentation général
     - Publicité (optionnel)
+    - Upload sur youtube
 * Rapport
     - Explication et justification des calculs effectués
     - Photos des montages
@@ -60,3 +61,25 @@
     - Présentation de la vidéo
     - Présentation rapide du projet
     - Démo
+
+## Timeline
+
+* *Lundi 16 octobre* Début du projet
+    - Storyboard vidéo
+    - Design poster
+* *Mardi 17 octobre* 
+    - Montages
+    - Calculs
+* *Mercredi 18 octobre* 
+    - Fin du développement de la communication série
+    - Poster
+* *Jeudi 19 octobre* 
+    - Fin du développement client & Arduino
+    - Poster
+    - Montage vidéo
+    - Rapport
+* *Vendredi 20 octobre* 
+    - *12h* Rendu de la vidéo, du poster et du rapport
+    - Amélioration code
+    - Debuggage code
+* *Lundi 23 octobre* Soutenance
