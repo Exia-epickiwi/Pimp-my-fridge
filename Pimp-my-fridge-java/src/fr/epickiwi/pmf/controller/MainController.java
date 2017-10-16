@@ -1,5 +1,6 @@
 package fr.epickiwi.pmf.controller;
 
+import fr.epickiwi.pmf.model.FridgeSettings;
 import fr.epickiwi.pmf.model.Model;
 import fr.epickiwi.pmf.view.GuiView;
 import fr.epickiwi.pmf.view.SerialView;
@@ -27,5 +28,11 @@ public class MainController {
 
     public void setGuiView(GuiView guiView) {
         this.guiView = guiView;
+    }
+
+    public void incrementOrderTemperature(double amount) {
+        FridgeSettings fridgeSettings = this.model.getFridgeSettings();
+        double lastValue = fridgeSettings.getOrderTemperature();
+        fridgeSettings.setOrderTemperature(lastValue+amount);
     }
 }

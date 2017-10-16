@@ -31,7 +31,7 @@
                                  <children>
                                     <AnchorPane VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="+" textFill="#393939" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <Button mnemonicParsing="false" onAction="#OnOrderPlusButtonAction" style="-fx-background-color: transparent;" text="+" textFill="#393939" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font size="50.0" />
                                              </font>
@@ -40,7 +40,7 @@
                                     </AnchorPane>
                                     <AnchorPane VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Label alignment="CENTER" text="15°C" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <Label fx:id="bigOrderLabel" alignment="CENTER" text="0°C" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font size="30.0" />
                                              </font>
@@ -56,7 +56,7 @@
                                     </AnchorPane>
                                     <AnchorPane VBox.vgrow="ALWAYS">
                                        <children>
-                                          <Button mnemonicParsing="false" style="-fx-background-color: transparent;" text="-" textFill="#393939" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <Button mnemonicParsing="false" onAction="#OnOrderMinusButtonAction" style="-fx-background-color: transparent;" text="-" textFill="#393939" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <font>
                                                 <Font size="50.0" />
                                              </font>
@@ -108,14 +108,14 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </Label>
-                                                <Label text="12 °C" GridPane.columnIndex="1" />
+                                                <Label fx:id="currentTemperatureLabel" text="12 °C" GridPane.columnIndex="1" />
                                                 <Label text="Consigne" GridPane.rowIndex="1">
                                                    <font>
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </Label>
-                                                <Label text="15 °C" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <Label text="20 min" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                <Label fx:id="orderLabel" text="0 °C" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label fx:id="remainingTimeLabel" text="20 min" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                                                 <Label text="Temps restant" GridPane.rowIndex="2">
                                                    <font>
                                                       <Font name="System Bold" size="13.0" />
@@ -168,18 +168,18 @@
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </Label>
-                                                <Label text="12 °C" GridPane.columnIndex="1" />
+                                                <Label fx:id="humidityLabel" text="12 °C" GridPane.columnIndex="1" />
                                                 <Label text="Point de rosée" GridPane.rowIndex="1">
                                                    <font>
                                                       <Font name="System Bold" size="13.0" />
                                                    </font>
                                                 </Label>
-                                                <Label text="15 °C" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <Label fx:id="dewPointLabel" text="15 °C" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                              </children>
                                           </GridPane>
                                           <VBox AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                                              <children>
-                                                <CheckBox mnemonicParsing="false" text="Empêcher la condensation" />
+                                                <CheckBox fx:id="avoidCondensation" mnemonicParsing="false" text="Empêcher la condensation" />
                                              </children>
                                           </VBox>
                                        </children>

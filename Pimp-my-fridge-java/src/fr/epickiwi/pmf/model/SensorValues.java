@@ -1,7 +1,8 @@
 package fr.epickiwi.pmf.model;
 
-import javafx.beans.property.FloatProperty;
-import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.property.*;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
@@ -11,97 +12,112 @@ public class SensorValues {
     public static final String HUMIDITY_JSON_KEY = "hum";
     public static final double DELTA_SECOND = 1.0;
 
-    private FloatProperty temperature;
-    private FloatProperty humidity;
+    private DoubleProperty temperature;
+    private DoubleProperty humidity;
 
-    private FloatProperty remainingTime;    //COMPUTED
-    private FloatProperty dewPoint;         //COMPUTED
+    private IntegerProperty remainingTime;    //COMPUTED
+    private DoubleProperty dewPoint;         //COMPUTED
 
-    private ObservableList<Float> tempertatureHistory;
-    private ObservableList<Float> humidityHistory;
+    private ObservableList<Double> tempertatureHistory;
+    private ObservableList<Double> humidityHistory;
 
     public SensorValues() {
-        this.temperature = new SimpleFloatProperty(0);
-        this.humidity = new SimpleFloatProperty(0);
-        this.remainingTime = new SimpleFloatProperty(0);
-        this.remainingTime = new SimpleFloatProperty(0);
+        this.temperature = new SimpleDoubleProperty(0);
+        this.humidity = new SimpleDoubleProperty(0);
+        this.remainingTime = new SimpleIntegerProperty(0);
+        this.dewPoint = new SimpleDoubleProperty(0);
         this.tempertatureHistory = FXCollections.observableArrayList();
         this.humidityHistory = FXCollections.observableArrayList();
+
+        this.temperature.addListener(new OnValueChange());
+        this.humidity.addListener(new OnValueChange());
     }
 
     /* ----- COMPUTED VALUES ----- */
 
-    public void refreshRemainingTime(){
+    private void refreshRemainingTime(){
         //TODO implement
         this.setRemainingTime(0);
     }
 
-    public void refreshDewPoint(){
+    private void refreshDewPoint(){
         //TODO implement
         this.setDewPoint(0);
     }
 
+    private class OnValueChange implements ChangeListener<Number> {
+        @Override
+        public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+            refreshDewPoint();
+            refreshRemainingTime();
+        }
+    }
+
     /* ----- GETTERS AND SETTERS ----- */
 
-    public float getTemperature() {
+    public void setTemperature(double temperature) {
+        this.tempertatureHistory.add(this.getTemperature());
+        this.temperature.set(temperature);
+    }
+
+    public void setHumidity(double humidity) {
+        this.humidityHistory.add(this.getHumidity());
+        this.humidity.set(humidity);
+    }
+
+    public double getTemperature() {
         return temperature.get();
     }
 
-    public FloatProperty temperatureProperty() {
+    public DoubleProperty temperatureProperty() {
         return temperature;
     }
 
-    public void setTemperature(float temperature) {
-        this.tempertatureHistory.add(this.getTemperature());
-        this.temperature.set(temperature);
-        this.refreshDewPoint();
-        this.refreshRemainingTime();
-    }
-
-    public float getHumidity() {
+    public double getHumidity() {
         return humidity.get();
     }
 
-    public FloatProperty humidityProperty() {
+    public DoubleProperty humidityProperty() {
         return humidity;
     }
 
-    public void setHumidity(float humidity) {
-        this.humidityHistory.add(this.getHumidity());
-        this.humidity.set(humidity);
-        this.refreshDewPoint();
-        this.refreshRemainingTime();
-    }
-
-    public float getRemainingTime() {
+    public int getRemainingTime() {
         return remainingTime.get();
     }
 
-    public FloatProperty remainingTimeProperty() {
+    public IntegerProperty remainingTimeProperty() {
         return remainingTime;
     }
 
-    private void setRemainingTime(float remainingTime) {
+    public void setRemainingTime(int remainingTime) {
         this.remainingTime.set(remainingTime);
     }
 
-    public float getDewPoint() {
+    public double getDewPoint() {
         return dewPoint.get();
     }
 
-    public FloatProperty dewPointProperty() {
+    public DoubleProperty dewPointProperty() {
         return dewPoint;
     }
 
-    private void setDewPoint(float dewPoint) {
+    public void setDewPoint(double dewPoint) {
         this.dewPoint.set(dewPoint);
     }
 
-    public ObservableList<Float> getTempertatureHistory() {
+    public ObservableList<Double> getTempertatureHistory() {
         return tempertatureHistory;
     }
 
-    public ObservableList<Float> getHumidityHistory() {
+    public void setTempertatureHistory(ObservableList<Double> tempertatureHistory) {
+        this.tempertatureHistory = tempertatureHistory;
+    }
+
+    public ObservableList<Double> getHumidityHistory() {
         return humidityHistory;
+    }
+
+    public void setHumidityHistory(ObservableList<Double> humidityHistory) {
+        this.humidityHistory = humidityHistory;
     }
 }
