@@ -83,3 +83,13 @@
     - Amélioration code
     - Debuggage code
 * *Lundi 23 octobre* Soutenance
+
+## Installation du projet Java
+
+1. Ouvrir le dossier `Pimp-my-fridge-java` en tant que projet sur votre IDE.
+2. Téléchargez les dépendances :
+    - *openjfx* disponible sur AUR
+    - *RXTX* disponible sur AUR
+    - *Json-java* disponible sur [Maven](https://search.maven.org/remotecontent?filepath=org/json/json/20170516/json-20170516.jar)
+3. Ajouter *JavaFx*, *RXTX* et *Json-java* au classpath de l'application
+4. Exécutez avec la class principale `fr.epickiwi.pmf.Main`
