@@ -6,9 +6,13 @@ package fr.epickiwi.pmf.model;
 public class Model {
 
     private SerialConnection serialConnection;
+    private SensorValues sensorValues;
+    private FridgeSettings fridgeSettings;
 
     public Model() {
-        serialConnection = new SerialConnection();
+        this.serialConnection = new SerialConnection();
+        this.sensorValues = new SensorValues();
+        this.fridgeSettings = new FridgeSettings();
     }
 
     /* ----- GETTERS AND SETTERS ----- */
@@ -17,7 +21,11 @@ public class Model {
         return serialConnection;
     }
 
-    public void setSerialConnection(SerialConnection serialConnection) {
-        this.serialConnection = serialConnection;
+    public SensorValues getSensorValues() {
+        return sensorValues;
+    }
+
+    public FridgeSettings getFridgeSettings() {
+        return fridgeSettings;
     }
 }

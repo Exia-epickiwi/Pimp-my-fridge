@@ -4,7 +4,6 @@ import javafx.beans.property.FloatProperty;
 import javafx.beans.property.SimpleFloatProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import org.json.JSONObject;
 
 public class SensorValues {
 
@@ -28,13 +27,6 @@ public class SensorValues {
         this.remainingTime = new SimpleFloatProperty(0);
         this.tempertatureHistory = FXCollections.observableArrayList();
         this.humidityHistory = FXCollections.observableArrayList();
-    }
-
-    public JSONObject getJsonObject(){
-        JSONObject json = new JSONObject();
-        json.append(TEMPERATURE_JSON_KEY,this.getTemperature());
-        json.append(HUMIDITY_JSON_KEY, this.getHumidity());
-        return json;
     }
 
     /* ----- COMPUTED VALUES ----- */
