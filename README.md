@@ -2,7 +2,19 @@
 
 *Pimp my fridge* est un projet de 3e année dont l'objectif est de créer un circuit de refroidissement intelligent a l'aide d'une Arduino contrôlée par une application Java sur l'ordinateur connecté.
 
-## Cahier des charges
+## Installation du projet Java
+
+1. Ouvrir le dossier `Pimp-my-fridge-java` en tant que projet sur votre IDE.
+2. Téléchargez les dépendances :
+    - *openjfx* disponible sur AUR
+    - *RXTX* disponible sur AUR
+    - *Json-java* disponible sur [Maven](https://search.maven.org/remotecontent?filepath=org/json/json/20170516/json-20170516.jar)
+3. Ajouter *JavaFx*, *RXTX* et *Json-java* au classpath de l'application
+4. Exécutez avec la class principale `fr.epickiwi.pmf.Main`
+
+## Organisation
+
+### Cahier des charges
 
 * Poster
     - Explication des concepts physiques utilisés
@@ -62,7 +74,7 @@
     - Présentation rapide du projet
     - Démo
 
-## Timeline
+### Timeline
 
 * *Lundi 16 octobre* Début du projet
     - Storyboard vidéo
@@ -84,12 +96,17 @@
     - Debuggage code
 * *Lundi 23 octobre* Soutenance
 
-## Installation du projet Java
+## Vidéo de présentation
 
-1. Ouvrir le dossier `Pimp-my-fridge-java` en tant que projet sur votre IDE.
-2. Téléchargez les dépendances :
-    - *openjfx* disponible sur AUR
-    - *RXTX* disponible sur AUR
-    - *Json-java* disponible sur [Maven](https://search.maven.org/remotecontent?filepath=org/json/json/20170516/json-20170516.jar)
-3. Ajouter *JavaFx*, *RXTX* et *Json-java* au classpath de l'application
-4. Exécutez avec la class principale `fr.epickiwi.pmf.Main`
+* Timelapse jour après jour
+* Scène de présentation du mini-frigo en rotation avec une musique épique
+* Scene d'un contributeur entrain de coder
+* Scene d'un contributeur en train de monter le frigo
+* Scene d'un contributeur en train de calculer
+* Timelapse du montage en gros plan
+* Publicité coca-cola
+* Interview des créateurs en mode Steve Trabajo
+
+## Design poster
+
+![Poster](img/poster.jpg)
