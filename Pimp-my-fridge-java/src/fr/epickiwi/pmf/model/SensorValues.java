@@ -6,6 +6,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import static java.lang.StrictMath.sqrt;
+
 public class SensorValues {
 
     private DoubleProperty temperature;
@@ -37,8 +39,13 @@ public class SensorValues {
     }
 
     private void refreshDewPoint(){
-        //TODO implement
-        this.setDewPoint(0);
+        double ta = this.getTemperature();
+        double ur = this.getHumidity()/100;
+        double k = ((17.27*ta)/(237.7+ta))+Math.log(ur);
+        double tr = (237.7*k)/(17.27-k);
+        //double tr = Math.pow(ur/100, 1/8)*(112 + (0.9*ta))+(0.1*ta)-112;
+        if(!Double.isNaN(tr) && ta > 0 && ta < 60)
+            this.setDewPoint(tr);
     }
 
     private class OnValueChange implements ChangeListener<Number> {
