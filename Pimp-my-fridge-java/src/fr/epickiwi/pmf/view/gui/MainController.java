@@ -103,26 +103,28 @@ public class MainController extends ViewController {
     /* ----- EVENT LISTENERS ----- */
 
     private class OnCurrentTemperatureChange implements ChangeListener<Number>{
-        private int increment = 0;
+        private long startTime = System.currentTimeMillis();
         @Override
         public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-            temperatureSerie.getData().add(new XYChart.Data<>(this.increment, t1));
-            orderTemperatureSerie.getData().add(new XYChart.Data<>(this.increment, orderTemperatureProperty.get()));
-            dewPointSerie.getData().add(new XYChart.Data<>(this.increment, currentDewPointProperty.get()));
-            ((NumberAxis) temperatureLineChart.getXAxis()).setUpperBound((double) this.increment);
-            ((NumberAxis) temperatureLineChart.getXAxis()).setLowerBound((double) this.increment-CHART_AXIS_SIZE);
-            this.increment++;
+            long currentTick = (System.currentTimeMillis() - startTime)/1000;
+
+            temperatureSerie.getData().add(new XYChart.Data<>(currentTick, t1));
+            orderTemperatureSerie.getData().add(new XYChart.Data<>(currentTick, orderTemperatureProperty.get()));
+            dewPointSerie.getData().add(new XYChart.Data<>(currentTick, currentDewPointProperty.get()));
+            ((NumberAxis) temperatureLineChart.getXAxis()).setUpperBound((double) currentTick);
+            ((NumberAxis) temperatureLineChart.getXAxis()).setLowerBound((double) currentTick-CHART_AXIS_SIZE);
         }
     }
 
     private class OnCurrentHumidityChange implements ChangeListener<Number>{
-        private int increment = 0;
+        private long startTime = System.currentTimeMillis();
         @Override
         public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-            humiditySerie.getData().add(new XYChart.Data<>(this.increment, t1));
-            ((NumberAxis) humidityLineChart.getXAxis()).setUpperBound((double) this.increment);
-            ((NumberAxis) humidityLineChart.getXAxis()).setLowerBound((double) this.increment-CHART_AXIS_SIZE);
-            this.increment++;
+            long currentTick = (System.currentTimeMillis() - startTime)/1000;
+
+            humiditySerie.getData().add(new XYChart.Data<>(currentTick, t1));
+            ((NumberAxis) humidityLineChart.getXAxis()).setUpperBound((double) currentTick);
+            ((NumberAxis) humidityLineChart.getXAxis()).setLowerBound((double) currentTick-CHART_AXIS_SIZE);
         }
     }
 
