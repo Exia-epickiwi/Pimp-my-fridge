@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
@@ -127,9 +126,9 @@
                                     </AnchorPane>
                                     <AnchorPane HBox.hgrow="ALWAYS">
                                        <children>
-                                          <LineChart animated="false" legendVisible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <LineChart fx:id="temperatureLineChart" animated="false" legendSide="RIGHT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                             <xAxis>
-                                              <CategoryAxis side="BOTTOM" />
+                                              <NumberAxis side="BOTTOM" />
                                             </xAxis>
                                             <yAxis>
                                               <NumberAxis label="°C" side="LEFT" />
@@ -186,9 +185,9 @@
                                     </AnchorPane>
                                     <AnchorPane HBox.hgrow="ALWAYS">
                                        <children>
-                                          <LineChart animated="false" legendVisible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                          <LineChart fx:id="humidityLineChart" animated="false" legendSide="RIGHT" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <xAxis>
-                                                <CategoryAxis side="BOTTOM" />
+                                                <NumberAxis side="BOTTOM" />
                                              </xAxis>
                                              <yAxis>
                                                 <NumberAxis label="\%" side="LEFT" />

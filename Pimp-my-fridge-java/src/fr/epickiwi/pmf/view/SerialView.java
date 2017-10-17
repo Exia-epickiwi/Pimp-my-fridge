@@ -7,6 +7,7 @@ import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.util.converter.NumberStringConverter;
 import org.json.JSONObject;
 
 import java.io.*;
@@ -31,7 +32,6 @@ public class SerialView extends fr.epickiwi.pmf.view.View {
      */
     public SerialView(Model model) {
         super(model);
-
         this.model.getSerialConnection().connectedPortProperty().addListener(new OnSerialPortConnect());
         this.orderTehmperatureProperty = this.model.getFridgeSettings().orderTemperatureProperty();
         this.orderTehmperatureProperty.addListener(new OnOrderTemperatureChange());
