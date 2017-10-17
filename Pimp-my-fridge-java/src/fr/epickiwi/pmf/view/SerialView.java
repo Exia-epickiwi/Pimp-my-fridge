@@ -1,15 +1,15 @@
 package fr.epickiwi.pmf.view;
 
+import fr.epickiwi.pmf.controller.Controller;
 import fr.epickiwi.pmf.model.Model;
 import gnu.io.*;
+import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import org.json.JSONObject;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.Enumeration;
 
@@ -31,6 +31,7 @@ public class SerialView extends fr.epickiwi.pmf.view.View {
      */
     public SerialView(Model model) {
         super(model);
+
         this.model.getSerialConnection().connectedPortProperty().addListener(new OnSerialPortConnect());
         this.orderTehmperatureProperty = this.model.getFridgeSettings().orderTemperatureProperty();
         this.orderTehmperatureProperty.addListener(new OnOrderTemperatureChange());
@@ -71,6 +72,12 @@ public class SerialView extends fr.epickiwi.pmf.view.View {
     public void disconnectPort() {
         if(this.model.getSerialConnection().getConnectedPort() == null)
             return;
+        try {
+            this.inputStream.close();
+            this.outputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         this.model.getSerialConnection().getConnectedPort().close();
         this.model.getSerialConnection().setConnected(false);
         this.model.getSerialConnection().setConnectedPort(null);
@@ -80,17 +87,8 @@ public class SerialView extends fr.epickiwi.pmf.view.View {
     private void sendSettings(){
         JSONObject json = new JSONObject();
         json.accumulate("type","refresh-settings");
-        json.accumulate("temperature",this.orderTehmperatureProperty.get());
+        json.accumulate("order-temperature",this.orderTehmperatureProperty.get());
         this.sendMessage(json.toString());
-    }
-
-    private void refreshData(JSONObject json){
-        if(json.has("temperature")){
-            //this.dataTemperatureProperty.set(json.getDouble("temperature"));
-        }
-        if(json.has("humidity")){
-            //this.dataHumidityProperty.set(json.getDouble("humidity"));
-        }
     }
 
     private void sendMessage(String message){
@@ -108,29 +106,12 @@ public class SerialView extends fr.epickiwi.pmf.view.View {
         System.out.println("<<< "+message);
     }
 
-    private void dispatchMessage(String json){
-        JSONObject parsedJson = new JSONObject(json);
-        if(!parsedJson.has("type")){
-            System.err.println("Le message n'a pas de type");
-            return;
-        }
-
-        switch(parsedJson.getString("type")){
-            case "refresh-data":
-                refreshData(parsedJson);
-                break;
-            default:
-                System.err.println("Type inconnu '"+parsedJson.getString("type")+"'");
-                break;
-        }
-    }
-
     /* ----- EVENT LISTENERS ----- */
 
     private class OnSerialPortConnect implements ChangeListener<SerialPort> {
         @Override
         public void changed(ObservableValue<? extends SerialPort> observableValue, SerialPort serialPort, SerialPort t1) {
-            if(t1 == null)
+            if (t1 == null)
                 return;
             try {
                 inputStream = new InputStreamReader(t1.getInputStream());
@@ -140,7 +121,7 @@ public class SerialView extends fr.epickiwi.pmf.view.View {
                 t1.notifyOnDataAvailable(true);
                 System.out.println("Communicateur connecté");
                 model.getSerialConnection().setConnected(true);
-            } catch(Exception e){
+            } catch (Exception e) {
                 System.err.println("Impossible de se connecter au port série");
                 e.printStackTrace();
             }
@@ -150,23 +131,29 @@ public class SerialView extends fr.epickiwi.pmf.view.View {
     private class OnSerialEvent implements SerialPortEventListener {
         @Override
         public void serialEvent(SerialPortEvent event) {
-            if(event.getEventType() != SerialPortEvent.DATA_AVAILABLE)
-                return;
+            if(event.getEventType() == SerialPortEvent.DATA_AVAILABLE) {
+                try {
 
-            try {
-
-                StringBuilder textBuilder = new StringBuilder();
-                char data = (char)inputStream.read();
-                while(data != '\n'){
-                    textBuilder.append((char)data);
-                    data = (char)inputStream.read();
+                    StringBuilder textBuilder = new StringBuilder();
+                    char data = (char) inputStream.read();
+                    while (data != '\n') {
+                        textBuilder.append((char) data);
+                        data = (char) inputStream.read();
+                    }
+                    String text = textBuilder.toString().replace("\r", "");
+                    System.out.println(">>> " + text);
+                    if(controller != null){
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run() {
+                                controller.getMainController().dispatchMessage(text);
+                            }
+                        });
+                    }
+                } catch (IOException e) {
+                    System.err.println("Impossible de lire le flux série");
+                    e.printStackTrace();
                 }
-                String text = textBuilder.toString().replace("\r","");
-                System.out.println(">>> "+text);
-                dispatchMessage(text);
-            } catch (IOException e) {
-                System.err.println("Impossible de lire le flux série");
-                e.printStackTrace();
             }
         }
     }
@@ -178,4 +165,10 @@ public class SerialView extends fr.epickiwi.pmf.view.View {
         }
     }
 
+    /* ------ GETTERS AND SETTERS ------ */
+
+    @Override
+    public void setController(Controller controller) {
+        super.setController(controller);
+    }
 }

@@ -8,10 +8,6 @@ import javafx.collections.ObservableList;
 
 public class SensorValues {
 
-    public static final String TEMPERATURE_JSON_KEY = "temp";
-    public static final String HUMIDITY_JSON_KEY = "hum";
-    public static final double DELTA_SECOND = 1.0;
-
     private DoubleProperty temperature;
     private DoubleProperty humidity;
 
