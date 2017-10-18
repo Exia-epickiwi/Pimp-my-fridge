@@ -81,6 +81,9 @@ public class MainController extends ViewController {
         this.humiditySerie.setName("Humidité");
         currentTempertureProperty.addListener(new OnCurrentTemperatureChange());
         currentHumidityProperty.addListener(new OnCurrentHumidityChange());
+        currentDewPointProperty.addListener(new OnCurrentDewPointChange());
+        currentDewPointProperty.addListener(new OnCurrentOrderTemperatureChange());
+        orderTemperatureProperty.addListener(new OnCurrentOrderTemperatureChange());
 
         this.temperatureLineChart.getData().add(this.temperatureSerie);
         this.temperatureLineChart.getData().add(this.orderTemperatureSerie);
@@ -102,25 +105,43 @@ public class MainController extends ViewController {
 
     /* ----- EVENT LISTENERS ----- */
 
-    private class OnCurrentTemperatureChange implements ChangeListener<Number>{
-        private long startTime = System.currentTimeMillis();
+    private class OnCurrentTemperatureChange extends TimeChangeListener{
         @Override
         public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-            long currentTick = (System.currentTimeMillis() - startTime)/1000;
+            long currentTick = this.getCurrentSeconds();
 
             temperatureSerie.getData().add(new XYChart.Data<>(currentTick, t1));
-            orderTemperatureSerie.getData().add(new XYChart.Data<>(currentTick, orderTemperatureProperty.get()));
+            ((NumberAxis) temperatureLineChart.getXAxis()).setUpperBound((double) currentTick);
+            ((NumberAxis) temperatureLineChart.getXAxis()).setLowerBound((double) currentTick-CHART_AXIS_SIZE);
+        }
+    }
+
+    private class OnCurrentDewPointChange extends TimeChangeListener{
+        @Override
+        public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+            long currentTick = this.getCurrentSeconds();
+
             dewPointSerie.getData().add(new XYChart.Data<>(currentTick, currentDewPointProperty.get()));
             ((NumberAxis) temperatureLineChart.getXAxis()).setUpperBound((double) currentTick);
             ((NumberAxis) temperatureLineChart.getXAxis()).setLowerBound((double) currentTick-CHART_AXIS_SIZE);
         }
     }
 
-    private class OnCurrentHumidityChange implements ChangeListener<Number>{
-        private long startTime = System.currentTimeMillis();
+    private class OnCurrentOrderTemperatureChange extends TimeChangeListener{
         @Override
         public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
-            long currentTick = (System.currentTimeMillis() - startTime)/1000;
+            long currentTick = this.getCurrentSeconds();
+
+            orderTemperatureSerie.getData().add(new XYChart.Data<>(currentTick, orderTemperatureProperty.get()));
+            ((NumberAxis) temperatureLineChart.getXAxis()).setUpperBound((double) currentTick);
+            ((NumberAxis) temperatureLineChart.getXAxis()).setLowerBound((double) currentTick-CHART_AXIS_SIZE);
+        }
+    }
+
+    private class OnCurrentHumidityChange extends TimeChangeListener{
+        @Override
+        public void changed(ObservableValue<? extends Number> observableValue, Number number, Number t1) {
+            long currentTick = this.getCurrentSeconds();
 
             humiditySerie.getData().add(new XYChart.Data<>(currentTick, t1));
             ((NumberAxis) humidityLineChart.getXAxis()).setUpperBound((double) currentTick);
