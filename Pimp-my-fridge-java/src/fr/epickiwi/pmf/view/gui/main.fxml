@@ -16,7 +16,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="426.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/8.0.162-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.epickiwi.pmf.view.gui.MainController">
+<AnchorPane prefHeight="426.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/9" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.epickiwi.pmf.view.gui.MainController">
    <children>
       <HBox layoutX="200.0" layoutY="110.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -66,7 +66,7 @@
                                        <children>
                                           <VBox spacing="5.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                              <children>
-                                                <ComboBox editable="true" prefWidth="150.0" promptText="Preset" />
+                                                <ComboBox fx:id="preSetTemp" editable="true" onAction="#OnPreSetSelect" prefWidth="150.0" promptText="Preset" />
                                              </children>
                                           </VBox>
                                        </children>

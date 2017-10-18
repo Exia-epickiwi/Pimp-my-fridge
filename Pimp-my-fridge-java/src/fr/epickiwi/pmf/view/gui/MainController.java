@@ -1,5 +1,8 @@
 package fr.epickiwi.pmf.view.gui;
 
+import com.sun.deploy.uitoolkit.impl.fx.ui.FXConsole;
+import fr.epickiwi.pmf.model.FridgeSettings;
+import fr.epickiwi.pmf.model.Model;
 import fr.epickiwi.pmf.view.View;
 import fr.epickiwi.pmf.view.converter.PercentageConverter;
 import fr.epickiwi.pmf.view.converter.TemperatureConverter;
@@ -9,17 +12,21 @@ import javafx.beans.property.DoubleProperty;
 import javafx.beans.property.IntegerProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.fxml.FXML;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 
 public class MainController extends ViewController {
 
     private static final int CHART_AXIS_SIZE = 50;
 
+    @FXML
+    private ComboBox<Double> preSetTemp;
     @FXML
     private Label bigOrderLabel;
     @FXML
@@ -70,6 +77,8 @@ public class MainController extends ViewController {
         remainingTimeLabel.textProperty().bindBidirectional(remainingTimeProperty,new TimeConverter());
 
         avoidCondensation.selectedProperty().bindBidirectional(avoidCondensationProperty);
+        //ComboBox
+        preSetTemp.setItems(this.view.getModel().getPreSetTemp());
 
         this.temperatureSerie = new XYChart.Series<>();
         this.temperatureSerie.setName("Température actuelle");
@@ -101,6 +110,12 @@ public class MainController extends ViewController {
     @FXML
     private void OnOrderMinusButtonAction(){
         this.view.getController().getMainController().incrementOrderTemperature(-1);
+    }
+
+    @FXML
+    private void OnPreSetSelect() {
+        FridgeSettings fridgeSettings = this.view.getModel().getFridgeSettings();
+        fridgeSettings.setOrderTemperature(preSetTemp.getSelectionModel().getSelectedItem());
     }
 
     /* ----- EVENT LISTENERS ----- */
@@ -147,6 +162,10 @@ public class MainController extends ViewController {
             ((NumberAxis) humidityLineChart.getXAxis()).setUpperBound((double) currentTick);
             ((NumberAxis) humidityLineChart.getXAxis()).setLowerBound((double) currentTick-CHART_AXIS_SIZE);
         }
+    }
+
+    private void preSetTemp(){
+        preSetTemp.setItems(this.view.getModel().getPreSetTemp());
     }
 
 }
