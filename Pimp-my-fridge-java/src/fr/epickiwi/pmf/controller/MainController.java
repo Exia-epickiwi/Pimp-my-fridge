@@ -5,7 +5,10 @@ import fr.epickiwi.pmf.model.Model;
 import fr.epickiwi.pmf.view.GuiView;
 import fr.epickiwi.pmf.view.SerialView;
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
+import javafx.scene.control.Alert;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -21,8 +24,12 @@ public class MainController {
     private GuiView guiView;
 
     public MainController(Model model) {
+
         this.model = model;
+        this.model.getSensorValues().dewPointProperty().addListener(new OnDewPointChange());
+
     }
+
 
     public void launchMain(){
         this.guiView.getMainStage().show();
@@ -76,6 +83,33 @@ public class MainController {
     public void incrementOrderTemperature(double amount) {
         FridgeSettings fridgeSettings = this.model.getFridgeSettings();
         double lastValue = fridgeSettings.getOrderTemperature();
-        fridgeSettings.setOrderTemperature(lastValue+amount);
+        double lastDewPoint = this.model.getSensorValues().getDewPoint();
+        boolean isAvoiding = this.model.getFridgeSettings().isAvoidCondensation();
+        if((lastValue + amount < lastDewPoint + 2.0) && isAvoiding) {
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Attention !");
+            alert.setHeaderText("Vous avez coché \"Empêcher la condensation\"");
+            alert.setContentText("La température demandée est trop proche du point de rosée !");
+
+            alert.showAndWait();
+            return;
+        }
+        fridgeSettings.setOrderTemperature(lastValue + amount);
+
     }
-}
+
+    public class OnDewPointChange implements ChangeListener<Number>{
+        @Override
+        public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+            FridgeSettings fridgeSettings = model.getFridgeSettings();
+            double newDew = (double)newValue;
+            double lastTemp = fridgeSettings.getOrderTemperature();
+            boolean isAvoiding = model.getFridgeSettings().isAvoidCondensation();
+            if((newDew > lastTemp - 2.0) && isAvoiding){
+                fridgeSettings.setOrderTemperature(lastTemp+2.0);
+                return;
+            }
+        }
+    }
+
+    }
