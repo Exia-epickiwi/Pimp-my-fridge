@@ -142,6 +142,7 @@ public class SerialView extends fr.epickiwi.pmf.view.View {
                 t1.notifyOnDataAvailable(true);
                 System.out.println("Communicateur connecté");
                 model.getSerialConnection().setConnected(true);
+                sendSettings();
             } catch (Exception e) {
                 System.err.println("Impossible de se connecter au port série");
                 e.printStackTrace();
