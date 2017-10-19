@@ -12,7 +12,7 @@ public class MainStage extends AppStage {
         this.setMinHeight(this.rootScene.getHeight());
         this.setTitle("Pimp my fridge");
 
-        this.setOnCloseRequest(t -> this.close());
+        this.setOnCloseRequest(t -> this.view.getController().closeAllWindows());
     }
 
     @Override

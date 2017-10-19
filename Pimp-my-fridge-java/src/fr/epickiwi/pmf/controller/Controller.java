@@ -72,6 +72,7 @@ public class Controller {
     public void closeAllWindows(){
         this.guiView.getInstallStage().close();
         this.guiView.getMainStage().close();
+        this.serialView.disconnectTimer();
     }
 
     public void stopApplication() {

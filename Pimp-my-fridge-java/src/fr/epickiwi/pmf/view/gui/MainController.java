@@ -100,8 +100,11 @@ public class MainController extends ViewController {
         this.temperatureLineChart.getData().add(this.orderTemperatureSerie);
         this.temperatureLineChart.getData().add(this.dewPointSerie);
         this.humidityLineChart.getData().add(this.humiditySerie);
-        ((NumberAxis) temperatureLineChart.getXAxis()).setAutoRanging(false);
-        ((NumberAxis) humidityLineChart.getXAxis()).setAutoRanging(false);
+        temperatureLineChart.getXAxis().setAutoRanging(false);
+        humidityLineChart.getXAxis().setAutoRanging(false);
+        humidityLineChart.getYAxis().setAutoRanging(false);
+        ((NumberAxis) humidityLineChart.getYAxis()).setUpperBound(100);
+        ((NumberAxis) humidityLineChart.getYAxis()).setLowerBound(0);
     }
 
     @FXML

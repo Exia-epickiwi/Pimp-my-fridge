@@ -7,23 +7,28 @@ import javafx.application.Platform;
 import javafx.beans.property.DoubleProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.util.converter.NumberStringConverter;
 import org.json.JSONObject;
 
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Une vue de l'application en charge de communiquer avec le port série
  */
 public class SerialView extends fr.epickiwi.pmf.view.View {
 
+    private Timer sendTimer;
     private InputStreamReader inputStream;
     private OutputStreamWriter outputStream;
     private DoubleProperty orderTehmperatureProperty;
     private DoubleProperty dataTemperatureProperty;
     private DoubleProperty dataHumidityProperty;
+    private TimerTask currentTask;
+
+    private static final int SEND_COOLDOWN = 500;
 
     /**
      * Construit la vue
@@ -38,6 +43,8 @@ public class SerialView extends fr.epickiwi.pmf.view.View {
 
         this.dataTemperatureProperty = this.model.getSensorValues().temperatureProperty();
         this.dataHumidityProperty = this.model.getSensorValues().temperatureProperty();
+
+        this.sendTimer = new Timer();
     }
 
     public ArrayList<CommPortIdentifier> searchPorts(){
@@ -88,7 +95,17 @@ public class SerialView extends fr.epickiwi.pmf.view.View {
         JSONObject json = new JSONObject();
         json.accumulate("type","refresh-settings");
         json.accumulate("order-temperature",this.orderTehmperatureProperty.get());
-        this.sendMessage(json.toString());
+        if(this.currentTask != null){
+            this.currentTask.cancel();
+            this.currentTask = null;
+        }
+        this.currentTask = new TimerTask() {
+            @Override
+            public void run() {
+                sendMessage(json.toString());
+            }
+        };
+        this.sendTimer.schedule(this.currentTask,SEND_COOLDOWN);
     }
 
     private void sendMessage(String message){
@@ -104,6 +121,10 @@ public class SerialView extends fr.epickiwi.pmf.view.View {
             e.printStackTrace();
         }
         System.out.println("<<< "+message);
+    }
+
+    public void disconnectTimer(){
+        this.sendTimer.cancel();
     }
 
     /* ----- EVENT LISTENERS ----- */
