@@ -13,7 +13,7 @@ float const A = 0.00109613;
 float const B = 0.000240164;
 float const C = 5.87433*pow(10,-8);
 bool is_allumed = true;
-
+float order = 18;
 unsigned long previousMillis = 0;
 const long interval = 1000;
 float tempThermi = 0;
@@ -64,6 +64,15 @@ void loop() {
     root["humidity"] = h;
     root.printTo(Serial);
     Serial.println();
+
+    smooth_frigde(tempThermi, order);
+
+    if(tempThermi >= order && !is_allumed) {
+      switch_fridge(true);
+    }
+    if(tempThermi <= order && is_allumed) {
+      switch_fridge(false);
+    }
    }
   }
 
@@ -80,28 +89,44 @@ void loop() {
       return;
     }
     
-    float order = float(message["order-temperature"]);
+    order = float(message["order-temperature"]);
     //Serial.println("Consigne reçue  :"+ String(order));
     //Serial.println("Température actuelle  :"+ String(tempThermi));
     
     if(order >= tempThermi) {
-      //Serial.println("STOP le frigo");
-      analogWrite(Peltier,0);
-      digitalWrite(LED,LOW);
-      if(is_allumed) {
-        is_allumed= false;
-      }
-      
+      // Stop le frigo
+      switch_fridge(false);
     }
     else {
-      analogWrite(Peltier,255);
-      digitalWrite(LED,HIGH);
-      if(!is_allumed) {
-        is_allumed = true;
-      }
+      // Démarre le frigo
+      switch_fridge(true);
     }
     
 }
 
+void switch_fridge(boolean ON) {
+  if(ON) {
+    analogWrite(Peltier,255);
+    digitalWrite(LED,HIGH);
+    is_allumed = true;
+  }
+  else {
+    analogWrite(Peltier,0);
+    digitalWrite(LED,LOW);
+    is_allumed = false;
+  }
+}
+
+void smooth_frigde(float temp, float order) {
+  if(temp > order && temp - order <= 1.5){
+     analogWrite(Peltier,224);
+  }
+  if(temp > order && temp - order <= 0.5){
+     analogWrite(Peltier,192);
+  }
+}
+
+
+//Pour une consigne donnée 
 
  
