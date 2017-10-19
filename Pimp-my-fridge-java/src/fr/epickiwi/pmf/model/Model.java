@@ -23,6 +23,7 @@ public class Model {
         preSetTemp.add(5.0);
         preSetTemp.add(13.0);
         preSetTemp.add(15.0);
+        preSetTemp.add(18.0);
         preSetTemp.add(20.0);
 
     }
