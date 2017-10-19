@@ -24,11 +24,11 @@ PMF fut un projet d'une semaine très intense d'un équipe de 3 personnes très 
 
 **Fabrice Genuino**
 
-Pour aboutir au premier prototype nous avons du nous plonger dans la Thermodynamique et l’électronique.
+Pour aboutir au premier prototype nous avons du nous plonger dans la Thermodynamique et l’électronique des circuits automatiques.
 
 On a commencé par faire beaucoup de calculs. comme l'isolation, la température interne, les variations entre températures mais aussi le système a mettre en place pour créer P-Fresh, le système qui permet de conserver une température dans l'objet.
 
-*Timelapse du spécialiste entrain de faire les calculs de stheinart hart*
+*Timelapse du spécialiste entrain de faire les calculs de steinhard hart*
 
 Puis on a conçu le circuit P22 qui contrôle la température intelligemment. Ce circuit embarque prés de 2 capteurs ultra-précis pour un résultat au delà de toutes nos espérances. Ce circuit analyse la température et l'humidité dans l'objet pour conserver la température idéale et empêcher la très désagréable condensation sur la canette.
 

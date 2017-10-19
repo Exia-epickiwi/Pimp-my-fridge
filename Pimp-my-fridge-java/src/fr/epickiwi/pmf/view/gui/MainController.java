@@ -113,8 +113,9 @@ public class MainController extends ViewController {
 
     @FXML
     private void OnPreSetSelect() {
-        FridgeSettings fridgeSettings = this.view.getModel().getFridgeSettings();
-        fridgeSettings.setOrderTemperature(preSetTemp.getSelectionModel().getSelectedItem());
+        FridgeSettings settings = this.view.getModel().getFridgeSettings();
+        settings.setOrderTemperature(preSetTemp.getSelectionModel().getSelectedItem());
+        preSetTemp.getSelectionModel().clearSelection();
     }
 
     /* ----- EVENT LISTENERS ----- */
