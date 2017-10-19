@@ -26,10 +26,8 @@ public class MainController {
     private GuiView guiView;
 
     public MainController(Model model) {
-
         this.model = model;
         this.model.getSensorValues().dewPointProperty().addListener(new OnDewPointChange());
-
     }
 
 
@@ -69,8 +67,6 @@ public class MainController {
             model.getSensorValues().setHumidity(json.getDouble("humidity"));
         }
     }
-
-    /* ----- RECEPTION DES DONNEES SERIE ----- */
 
     /* ----- GETTERS AND SETTERS ----- */
 

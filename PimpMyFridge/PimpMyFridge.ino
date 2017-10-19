@@ -7,26 +7,30 @@
 DHT dht(DHTPIN, DHTTYPE);
 
 int tempSensor = 0;
-int LED = 12;
-int Peltier = 5;
-float A = 0.00109613;
-float B = 0.000240164;
-float C = 5.87433*pow(10,-8);
+int const LED = 12;
+int const Peltier = 5;
+float const A = 0.00109613;
+float const B = 0.000240164;
+float const C = 5.87433*pow(10,-8);
+bool is_allumed = true;
 
 unsigned long previousMillis = 0;
 const long interval = 1000;
 float tempThermi = 0;
+
 void setup() {
   Serial.begin(9600);
   pinMode(Peltier,OUTPUT);
   pinMode(LED,OUTPUT);
+  analogWrite(Peltier,255);
+  digitalWrite(LED,HIGH);
+
   
   dht.begin();
 }
 
 void loop() {
-  analogWrite(Peltier,255);
-  digitalWrite(LED,HIGH);
+  
   
   unsigned long currentMillis = millis();
   
@@ -54,7 +58,7 @@ void loop() {
     float tension = output * 0.0048;
     float resistance = 10000/((5/tension)-1);
 
-    float tempThermi = 1/(A+B*log(resistance)+C*pow(log(resistance),3));
+    tempThermi = 1/(A+B*log(resistance)+C*pow(log(resistance),3));
     tempThermi = tempThermi-273.15;
     root["temperature"] =  tempThermi;
     root["humidity"] = h;
@@ -66,20 +70,35 @@ void loop() {
  void serialEvent()
 {
     String text = "";
-    char data = Serial.read();
-    while(data != '\n' && data != '\r' && data > 0){
-      text += data;
-      data = Serial.read();
-    }
-    while(Serial.read() != -1);
+    text = Serial.readString();
+    
     DynamicJsonBuffer  jsonBufferMessage(200);
     JsonObject& message = jsonBufferMessage.parseObject(text);
     
-    float order = message["order-temperature"];
-    Serial.println(order);
-    if(order <= tempThermi) {
+     if (!message.success()) {
+      Serial.println("parseObject() failed");
+      return;
+    }
+    
+    float order = float(message["order-temperature"]);
+    //Serial.println("Consigne reçue  :"+ String(order));
+    //Serial.println("Température actuelle  :"+ String(tempThermi));
+    
+    if(order >= tempThermi) {
+      //Serial.println("STOP le frigo");
       analogWrite(Peltier,0);
       digitalWrite(LED,LOW);
+      if(is_allumed) {
+        is_allumed= false;
+      }
+      
+    }
+    else {
+      analogWrite(Peltier,255);
+      digitalWrite(LED,HIGH);
+      if(!is_allumed) {
+        is_allumed = true;
+      }
     }
     
 }
