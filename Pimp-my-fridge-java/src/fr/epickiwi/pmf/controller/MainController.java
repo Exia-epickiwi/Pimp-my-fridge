@@ -8,7 +8,9 @@ import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.concurrent.Task;
+import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ComboBox;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -111,5 +113,4 @@ public class MainController {
             }
         }
     }
-
     }

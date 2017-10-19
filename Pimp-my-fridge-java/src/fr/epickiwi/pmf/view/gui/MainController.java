@@ -76,6 +76,7 @@ public class MainController extends ViewController {
         remainingTimeLabel.textProperty().bindBidirectional(remainingTimeProperty,new TimeConverter());
 
         avoidCondensation.selectedProperty().bindBidirectional(avoidCondensationProperty);
+
         //ComboBox
         preSetTemp.setItems(this.view.getModel().getPreSetTemp());
 
@@ -114,8 +115,8 @@ public class MainController extends ViewController {
     @FXML
     private void OnPreSetSelect() {
         FridgeSettings settings = this.view.getModel().getFridgeSettings();
-        settings.setOrderTemperature(preSetTemp.getSelectionModel().getSelectedItem());
-        preSetTemp.getSelectionModel().clearSelection();
+        if(preSetTemp.getSelectionModel().getSelectedItem() != null && preSetTemp.getSelectionModel().getSelectedItem() instanceof Double)
+            settings.setOrderTemperature(preSetTemp.getSelectionModel().getSelectedItem());
     }
 
     /* ----- EVENT LISTENERS ----- */
@@ -164,8 +165,8 @@ public class MainController extends ViewController {
         }
     }
 
-    private void preSetTemp(){
+    /*private void preSetTemp(){
         preSetTemp.setItems(this.view.getModel().getPreSetTemp());
-    }
+    }*/
 
 }
