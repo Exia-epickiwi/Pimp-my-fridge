@@ -20,9 +20,10 @@ public class Model {
         this.sensorValues = new SensorValues();
         this.fridgeSettings = new FridgeSettings();
 
+        preSetTemp.add(5.0);
+        preSetTemp.add(13.0);
         preSetTemp.add(15.0);
-        preSetTemp.add(6.0);
-        preSetTemp.add(7.0);
+        preSetTemp.add(20.0);
 
     }
 
