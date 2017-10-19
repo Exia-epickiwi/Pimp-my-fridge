@@ -5,7 +5,7 @@ import javafx.util.StringConverter;
 public class TimeConverter extends StringConverter<Number> {
     @Override
     public String toString(Number integer) {
-        return integer+" s";
+        return (((int)integer)/1000)+" s";
     }
 
     @Override

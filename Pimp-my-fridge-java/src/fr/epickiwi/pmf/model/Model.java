@@ -17,7 +17,7 @@ public class Model {
 
     public Model() {
         this.serialConnection = new SerialConnection();
-        this.sensorValues = new SensorValues();
+        this.sensorValues = new SensorValues(this);
         this.fridgeSettings = new FridgeSettings();
 
         preSetTemp.add(5.0);
