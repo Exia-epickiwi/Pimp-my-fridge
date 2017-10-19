@@ -9,5 +9,7 @@ public class InstallStage extends AppStage {
         super(view, "../../gui/install.fxml", 459, 326);
         this.setResizable(false);
         this.setTitle("Installation - Pimp my fridge");
+
+        this.setOnCloseRequest(t -> this.view.getController().closeAllWindows());
     }
 }
