@@ -1,6 +1,5 @@
 package fr.epickiwi.pmf.view.gui;
 
-import com.sun.deploy.uitoolkit.impl.fx.ui.FXConsole;
 import fr.epickiwi.pmf.model.FridgeSettings;
 import fr.epickiwi.pmf.model.Model;
 import fr.epickiwi.pmf.view.View;
