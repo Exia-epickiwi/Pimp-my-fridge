@@ -5,6 +5,7 @@ import fr.epickiwi.pmf.view.GuiView;
 import fr.epickiwi.pmf.view.SerialView;
 import fr.epickiwi.pmf.view.View;
 import gnu.io.CommPortIdentifier;
+import javafx.application.Platform;
 
 import java.util.ArrayList;
 import java.util.Observable;
