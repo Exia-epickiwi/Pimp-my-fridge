@@ -56,8 +56,8 @@ void loop() {
 
     float tempThermi = 1/(A+B*log(resistance)+C*pow(log(resistance),3));
     tempThermi = tempThermi-273.15;
-    root["temperature"] =  t;
-    root["humidity"] = tempThermi;    
+    root["temperature"] =  tempThermi;
+    root["humidity"] = h;
     root.printTo(Serial);
     Serial.println();
    }
