@@ -15,7 +15,7 @@ float C = 5.87433*pow(10,-8);
 
 unsigned long previousMillis = 0;
 const long interval = 1000;
-
+float tempThermi = 0;
 void setup() {
   Serial.begin(9600);
   pinMode(Peltier,OUTPUT);
@@ -62,4 +62,27 @@ void loop() {
     Serial.println();
    }
   }
+
+ void serialEvent()
+{
+    String text = "";
+    char data = Serial.read();
+    while(data != '\n' && data != '\r' && data > 0){
+      text += data;
+      data = Serial.read();
+    }
+    while(Serial.read() != -1);
+    DynamicJsonBuffer  jsonBufferMessage(200);
+    JsonObject& message = jsonBufferMessage.parseObject(text);
+    
+    float order = message["order-temperature"];
+    Serial.println(order);
+    if(order <= tempThermi) {
+      analogWrite(Peltier,0);
+      digitalWrite(LED,LOW);
+    }
+    
+}
+
+
  
