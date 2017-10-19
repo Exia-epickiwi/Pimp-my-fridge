@@ -1,6 +1,7 @@
 package fr.epickiwi.pmf.view.window;
 
 import fr.epickiwi.pmf.view.View;
+import fr.epickiwi.pmf.view.gui.MainController;
 
 public class MainStage extends AppStage {
 
@@ -11,6 +12,12 @@ public class MainStage extends AppStage {
         this.setMinHeight(this.rootScene.getHeight());
         this.setTitle("Pimp my fridge");
 
+        this.setOnCloseRequest(t -> this.close());
     }
 
+    @Override
+    public void close() {
+        ((MainController) controller).stopChartTimer();
+        super.close();
+    }
 }
