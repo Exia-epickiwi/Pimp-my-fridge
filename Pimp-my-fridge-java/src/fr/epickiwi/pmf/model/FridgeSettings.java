@@ -11,7 +11,7 @@ public class FridgeSettings {
     private ObservableList<TemperaturePreset> presets;
 
     public FridgeSettings() {
-        this.orderTemperature = new SimpleDoubleProperty(0);
+        this.orderTemperature = new SimpleDoubleProperty(18);
         this.avoidCondensation = new SimpleBooleanProperty(false);
         this.presets = FXCollections.observableArrayList();
     }

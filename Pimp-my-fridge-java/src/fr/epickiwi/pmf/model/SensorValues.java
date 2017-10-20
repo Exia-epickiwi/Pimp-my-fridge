@@ -6,6 +6,8 @@ import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.util.Date;
+
 import static java.lang.StrictMath.sqrt;
 
 public class SensorValues {
@@ -16,10 +18,12 @@ public class SensorValues {
     private IntegerProperty remainingTime;    //COMPUTED
     private DoubleProperty dewPoint;         //COMPUTED
 
-    private ObservableList<Double> tempertatureHistory;
-    private ObservableList<Double> humidityHistory;
+    private ObservableList<HistoryValue<Double>> tempertatureHistory;
+    private ObservableList<HistoryValue<Double>> humidityHistory;
+    private Model model;
 
-    public SensorValues() {
+    public SensorValues(Model model) {
+        this.model = model;
         this.temperature = new SimpleDoubleProperty(0);
         this.humidity = new SimpleDoubleProperty(0);
         this.remainingTime = new SimpleIntegerProperty(0);
@@ -34,8 +38,22 @@ public class SensorValues {
     /* ----- COMPUTED VALUES ----- */
 
     private void refreshRemainingTime(){
-        //TODO implement
-        this.setRemainingTime(0);
+        int valueAmount = this.tempertatureHistory.size();
+        if(valueAmount < 2)
+            return;
+
+        HistoryValue<Double> v1 = this.tempertatureHistory.get(valueAmount-1);
+        HistoryValue<Double> v2 = this.tempertatureHistory.get(valueAmount-2);
+
+        double diffTemps = v2.getSysMili() - v1.getSysMili();
+        double diffValeurs = v2.getValue() - v1.getValue();
+        double coef = diffValeurs/diffTemps;
+
+        double restant = this.getTemperature() - this.model.getFridgeSettings().getOrderTemperature();
+
+        int result = (int) Math.round(coef*restant);
+
+        this.setRemainingTime(result);
     }
 
     private void refreshDewPoint(){
@@ -43,7 +61,6 @@ public class SensorValues {
         double ur = this.getHumidity()/100;
         double k = ((17.27*ta)/(237.7+ta))+Math.log(ur);
         double tr = (237.7*k)/(17.27-k);
-        //double tr = Math.pow(ur/100, 1/8)*(112 + (0.9*ta))+(0.1*ta)-112;
         if(!Double.isNaN(tr) && ta > 0 && ta < 60)
             this.setDewPoint(tr);
     }
@@ -59,12 +76,12 @@ public class SensorValues {
     /* ----- GETTERS AND SETTERS ----- */
 
     public void setTemperature(double temperature) {
-        this.tempertatureHistory.add(this.getTemperature());
+        this.tempertatureHistory.add(new HistoryValue<>(System.currentTimeMillis(),this.getTemperature()));
         this.temperature.set(temperature);
     }
 
     public void setHumidity(double humidity) {
-        this.humidityHistory.add(this.getHumidity());
+        this.humidityHistory.add(new HistoryValue<>(System.currentTimeMillis(),this.getHumidity()));
         this.humidity.set(humidity);
     }
 
@@ -108,19 +125,19 @@ public class SensorValues {
         this.dewPoint.set(dewPoint);
     }
 
-    public ObservableList<Double> getTempertatureHistory() {
+    public ObservableList<HistoryValue<Double>> getTempertatureHistory() {
         return tempertatureHistory;
     }
 
-    public void setTempertatureHistory(ObservableList<Double> tempertatureHistory) {
+    public void setTempertatureHistory(ObservableList<HistoryValue<Double>> tempertatureHistory) {
         this.tempertatureHistory = tempertatureHistory;
     }
 
-    public ObservableList<Double> getHumidityHistory() {
+    public ObservableList<HistoryValue<Double>> getHumidityHistory() {
         return humidityHistory;
     }
 
-    public void setHumidityHistory(ObservableList<Double> humidityHistory) {
+    public void setHumidityHistory(ObservableList<HistoryValue<Double>> humidityHistory) {
         this.humidityHistory = humidityHistory;
     }
 }
