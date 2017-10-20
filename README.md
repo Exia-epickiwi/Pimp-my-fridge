@@ -33,11 +33,6 @@
     - Présentation général
     - Publicité (optionnel)
     - Upload sur youtube
-* Rapport
-    - Explication et justification des calculs effectués
-    - Photos des montages
-    - Explication et justification des montages
-    - Explication de la structure du programme client
 * Réfrigérateur USB
     - Refroidir et maintenir une température de consigne donnée
     - Éviter la condensation
