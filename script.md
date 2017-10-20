@@ -14,11 +14,13 @@
 
 **STEVE TRABAJO**
 
-J'ai imaginé ce projet il y à longtemps et j'ai toujours voulu l'amener a la réalité. Ce projet me tiens très a cœur et je suis persuadé qu'il va révolutionner la manière dont on se désaltère et dont on perçois la réfrigération.
+L'idée de ce projet m'est apparu il y a bien longtemps et j'ai toujours voulu, un jour, le concrétiser. 
+*Vidéo de Brainstmoring et de croquis*
+Ce projet me tiens très a cœur et je suis persuadé qu'il va révolutionner la manière dont on se désaltère et dont on perçois la réfrigération.
 
-Ce si petit objet est une révolution dans son domaine et le projet PMF va permettre à chacun de se désaltérer malgré le réchauffement climatique.
+Ce si petit objet est une révolution dans son domaine et le projet PFfridge va permettre à chacun de se désaltérer, n'importe où, n'importe quand, mais toujours avec fraicheur.
 
-PMF fut un projet d'une semaine très intense d'un équipe de 3 personnes très investies. On a fait beaucoup de rencontres et nous avons débattus avec toute l'équipe pour aboutir un produit révolutionnaire, au design inégalable et parfaitement fonctionnel.
+Cela n'aura pas été rendu possible sans un intense travail d'une équipe de 3 personnes très investies pour aboutir à un produit incroyable, au design inégalable et parfaitement fonctionnel.
 
 *Interview du spécialiste Hardware*
 
@@ -52,6 +54,6 @@ Il pourra ainsi régler la température d'un simple clic, et suivre en temps ré
 
 Ce produit est le fruit de plusieurs heures de travail, environ une semaine , et est représentatif de notre application et de notre goût du travail bien fait, parce que quand on a le goût de la chose, le goût de la chose bien faite, on ne peut que innover. 
 
-C'est ce goût de la chose qui nous a poussé aujourd'hui, à entreprendre une construction mécanique, et qui sait peut être demain, à expandre notre produit, à l'international *photosmontages*, car ici, à PFridge, *enlève ses lunettes*, nous n'avons pas froid aux yeux.
+C'est ce goût de la chose qui nous a poussé aujourd'hui, à entreprendre une construction mécanique, et qui sait peut être demain, à étendre notre produit, à l'international *photosmontages*, car ici, à PFridge, *enlève ses lunettes*, nous n'avons pas froid aux yeux.
 
 
