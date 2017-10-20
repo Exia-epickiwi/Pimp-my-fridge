@@ -41,3 +41,17 @@ C'est ainsi que l'on à créé notre tout premier prototype du projet PMF qui d�
 *Interview du spécialiste software*
 
 **Jean-michel Poinjar**
+
+
+
+**STEVE TRABAJO**
+Nous sommes aujourd'hui fier de vous présenter la nouvelle avancée dans le domaine du frigidaire.
+Du frais, de l'énergie, du pratique, du sucre.... PFridge, c'est un peu tout ça... et même un peu plus.
+En effet, nous avons également une application, simple d'utilisation, permettant à l'utilisateur de régler son P-Fridge, selon ses envies. 
+Il pourra ainsi régler la température d'un simple clic, et suivre en temps réel l'évolution des différents paramètres de son P-Fridge, incluant la température, l'humidité, l'évolution du point de rosée, tout cela dans des graphiques de qualité. 
+
+Ce produit est le fruit de plusieurs heures de travail, environ une semaine , et est représentatif de notre application et de notre goût du travail bien fait, parce que quand on a le goût de la chose, le goût de la chose bien faite, on ne peut que innover. 
+
+C'est ce goût de la chose qui nous a poussé aujourd'hui, à entreprendre une construction mécanique, et qui sait peut être demain, à expandre notre produit, à l'international *photosmontages*, car ici, à PFridge, *enlève ses lunettes*, nous n'avons pas froid aux yeux.
+
+
