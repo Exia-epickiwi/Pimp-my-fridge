@@ -1,4 +1,8 @@
+![Header](img/Header.png)
+
 # Pimp my fridge
+
+> [https://www.youtube.com/watch?v=7xhyZMAmoys](https://www.youtube.com/watch?v=7xhyZMAmoys)
 
 *Pimp my fridge* est un projet de 3e année dont l'objectif est de créer un circuit de refroidissement intelligent a l'aide d'une Arduino contrôlée par une application Java sur l'ordinateur connecté.
 
@@ -93,14 +97,14 @@
 
 ## Vidéo de présentation
 
-* Timelapse jour après jour
-* Scène de présentation du mini-frigo en rotation avec une musique épique
-* Scene d'un contributeur entrain de coder
-* Scene d'un contributeur en train de monter le frigo
-* Scene d'un contributeur en train de calculer
-* Timelapse du montage en gros plan
-* Publicité coca-cola
 * Interview des créateurs en mode Steve Trabajo
+* Timelapse jour après jour
+    - Timelapse du montage en gros plan
+    - Scene d'un contributeur entrain de coder
+    - Scene d'un contributeur en train de monter le frigo
+    - Scene d'un contributeur en train de calculer
+* Scène de présentation du mini-frigo en rotation avec une musique épique
+* Publicité coca-cola
 
 ## Design poster
 
